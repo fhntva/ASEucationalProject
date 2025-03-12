@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
             //love you
-            //как ты меня заебала хуйня тупорылая
+            //как ты меня заебала хуйня
         }
     }
 }
