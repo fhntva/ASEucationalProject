@@ -33,9 +33,15 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures{
+        viewBinding = true
+    }
+
 }
 
 dependencies {
+    val fragment_version = "1.8.6"
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -45,4 +51,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // Java language implementation
+    implementation("androidx.fragment:fragment:$fragment_version")
+    // Kotlin
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
 }

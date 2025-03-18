@@ -5,18 +5,33 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
+import com.example.aseducationalproject.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+    // что за метод onCreate()?
+    //что? Реализовать фон основного лейаута в соответствии с цветом макет
+    //Стилизовать кнопки, вынести в стили оформление текста кнопок.
+    //7 туда же
+
+
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // обращение по разметке
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        //
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
-            //love you
-            //как ты меня заебала хуйня
+
         }
+        class ExampleFragment : Fragment(R.layout.activity_main)
+
+
     }
 }
