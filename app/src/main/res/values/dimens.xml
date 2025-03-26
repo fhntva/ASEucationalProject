@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // размеры = все отступы в dp храним в димоне //
+    // размер текста нахуй //
+
+    <dimen name="layout_category_bcg_categories_224">224dp</dimen>
+
+
+    <dimen name="card_view_itemCategory_round">8dp</dimen>
+
+    <dimen name="text_view_burger">8dp</dimen> //
+
+    <dimen name="burger_description_margin">8dp</dimen>
+
+</resources>
