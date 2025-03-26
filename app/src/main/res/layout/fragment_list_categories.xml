@@ -1,19 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:backgroundTint="@color/backgroundBasicColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:backgroundTint="@color/backgroundBasicColor">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tvFragmentCategory"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Катеории"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/layout_category_bcg_categories_224">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bcg_categories" />
+
+
+
+        <TextView
+            android:layout_width="149dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/round_button_category_button"
+            android:fontFamily="@font/montserratalternates_medium"
+            android:gravity="center"
+            android:text="КАТЕГОРИИ"
+            android:textColor="#5F3678"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:ignore="HardcodedText,MissingConstraints"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/itemCategory"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_category"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="@integer/material_motion_duration_long_2"
+
+
+        />
+
+    </LinearLayout>

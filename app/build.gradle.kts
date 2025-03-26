@@ -41,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.constraintlayout)
     val fragment_version = "1.8.6"
 
     implementation(libs.androidx.core.ktx)

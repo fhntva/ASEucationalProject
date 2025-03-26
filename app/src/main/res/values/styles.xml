@@ -3,5 +3,19 @@
     <style name="Widget.Theme.ASEducationalProject.ButtonBar.Fullscreen" parent="">
         <item name="android:background">@color/backgroundBasicColor</item>
         <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
+
     </style>
+
+
+
+    <style name="graphite_666666" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/montserratalternates_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/graphite_666666</item>
+    </style>
+
+
+
+
+
 </resources>
