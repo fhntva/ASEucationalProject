@@ -1,5 +1,7 @@
 package com.example.aseducationalproject
 
+import android.content.DialogInterface
+import android.content.DialogInterface.OnClickListener
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +16,16 @@ import com.example.aseducationalproject.databinding.ItemCategoryBinding
 class CategoryListAdapter(private val dataSet: List<Category>) :
     RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
 
+
+    interface OnItemClickListener {
+        fun onItemClick()
+    }
+
+    private var itemClickListener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        itemClickListener = listener
+    }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -48,6 +60,8 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
         holder.descriptionTextView.text = category.description
 
 
+
+
         val drawable = try {
             Drawable.createFromStream(holder.itemView.context.assets.open(category.imageUrl), null)
         } catch (e: Exception) {
@@ -57,6 +71,11 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
 
         holder.imageView.setImageDrawable(drawable)
         holder.imageView.contentDescription = category.title
+        holder.imageView.setOnClickListener {
+
+            itemClickListener?.onItemClick()
+        }
+
     }
 
     override fun getItemCount() = dataSet.size
