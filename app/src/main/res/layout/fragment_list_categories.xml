@@ -12,7 +12,6 @@
         android:layout_height="@dimen/layout_category_bcg_categories_224">
 
         <ImageView
-            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -36,19 +35,20 @@
             tools:ignore="HardcodedText,MissingConstraints"
             />
 
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/itemCategory"
-        android:clipToPadding="false"
+        android:id="@+id/rvCategories"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        tools:itemCount="6"
-        tools:listitem="@layout/item_category"
+        android:layout_marginHorizontal="@dimen/main_space_8"
+        android:layout_marginVertical="@dimen/main_space_8"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="@integer/material_motion_duration_long_2"
-
-
-        />
+        app:spanCount="2"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_category" />
 
     </LinearLayout>

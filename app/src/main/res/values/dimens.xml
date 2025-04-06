@@ -13,4 +13,6 @@
 
     <dimen name="burger_description_margin">8dp</dimen>
 
+    <dimen name="main_space_8">8dp</dimen>
+
 </resources>

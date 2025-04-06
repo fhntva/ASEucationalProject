@@ -1,7 +1,10 @@
 package com.example.aseducationalproject
 
 import android.os.Bundle
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -20,41 +23,44 @@ class MainActivity : AppCompatActivity() {
         // обращение по разметке
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //
 
-        if (savedInstanceState == null) {
-            supportFragmentManager.commit {
-                setReorderingAllowed(true)
-                add<CategoriesListFragment>(R.id.mainContainer)
-            }
-
-        binding.btnCategoryMain.setOnClickListener {
-            supportFragmentManager.commit {
-                replace<CategoriesListFragment>(R.id.mainContainer)
-                setReorderingAllowed(true)
-                addToBackStack("name")
-            }
-        }
-            binding.btnFavoritesMain.setOnClickListener {
+            if (savedInstanceState == null) {
                 supportFragmentManager.commit {
-                    replace<FragmentFavorites>(R.id.mainContainer)
                     setReorderingAllowed(true)
+                    add<CategoriesListFragment>(R.id.mainContainer)
+                    println("Я мейн окно")
+                }
+
 
                 }
+                binding.btnCategoryMain.setOnClickListener {
+                    supportFragmentManager.commit {
+                        replace<CategoriesListFragment>(R.id.mainContainer)
+                        //setReorderingAllowed(true)
+                        addToBackStack("name")
+                        println("Я btnCategoryMain")
+                    }
+                }
+                binding.btnFavoritesMain.setOnClickListener {
+                    supportFragmentManager.commit {
+                        replace<FragmentFavorites>(R.id.mainContainer)
+                        setReorderingAllowed(true)
+
+                        println("Я btnFavoritesMain")
+
+
+
+                    }
+                }
+
             }
-
-
-
         }
-    }
 
-}
-    //            enableEdgeToEdge()
-//            setContentView(R.layout.activity_main)
-//            ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-//                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-//                v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-//                insets
+
+
+
+
+
 
 
 
