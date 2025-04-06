@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/itemCategory"
-        android:clickable="true"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        app:cardCornerRadius="@dimen/card_view_itemCategory_round"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_margin="@dimen/card_view_itemCategory_round"
-    >
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
+    android:clickable="true"
+    android:focusable="true"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardCornerRadius="@dimen/card_view_itemCategory_round"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_margin="@dimen/card_view_itemCategory_round">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <ImageView
 
-            android:id="@+id/itemcategory_burger"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/ivCategory"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
             android:src="@drawable/burger"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/burgersText"
+            android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/montserratalternates_medium"
             android:text="БУРГЕРЫ"
             android:textColor="#5F3678"
             android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/itemcategory_burger">
+            app:layout_constraintTop_toBottomOf="@+id/ivCategory">
 
         </TextView>
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:id="@+id/tvCategoryDescription"
+            style="@style/graphite_666666"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:text="Рецепты всех \nпопулярных видов\nбургеров"
-            style="@style/graphite_666666"
+            app:layout_constraintTop_toBottomOf="@+id/tvCategory"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/burgersText">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
         </TextView>
 
