@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
@@ -49,20 +50,29 @@ class CategoriesListFragment :
         binding.rvCategories.adapter = categoriesAdapter
 
         categoriesAdapter.setOnItemClickListener(object : CategoryListAdapter.OnItemClickListener{
-            override fun onItemClick() {
-                openRecipesByCategoryId()
+            override fun onItemClick(Id: Int) {
+                openRecipesByCategoryId(id)
             }
         })
 
 
     }
-    private fun openRecipesByCategoryId()
+    private fun openRecipesByCategoryId(categoryId: Int)
     {
+        val category = STUB.getCategories()[categoryId]
+        val bundle = bundleOf(
+            "ARG_CATEGORY_ID" to categoryId,
+            "AGE_CATEGORY_NAME"  to category.title,
+            "ARG_CATEGORY_IMAGE_URL" to category.imageUrl
+
+
+        )
+
         fragmentManager?.commit {
             setReorderingAllowed(true)
-            replace<RecipesListFragment>(R.id.mainContainer)
+            replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
         }
-
+        val categoryId: Int
     }
 
 
