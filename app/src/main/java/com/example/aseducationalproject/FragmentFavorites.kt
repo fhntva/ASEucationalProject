@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.aseducationalproject.databinding.FragmentFavoritesBinding
 
 class FragmentFavorites:
-    Fragment(R.layout.fragment_list_categories) {
+    Fragment(R.layout.fragment_favorites) {
 
         private var _binding: FragmentFavoritesBinding? = null
         private val binding

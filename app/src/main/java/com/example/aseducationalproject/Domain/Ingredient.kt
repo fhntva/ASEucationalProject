@@ -1,7 +1,7 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.Domain
 
 class Ingredient(
-    val quantity: Int,
+    val quantity: String,
     val unitOfMeasure: String,
     val description: String,
 )

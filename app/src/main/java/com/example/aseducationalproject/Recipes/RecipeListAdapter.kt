@@ -1,7 +1,5 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.Recipes
 
-import android.content.DialogInterface
-import android.content.DialogInterface.OnClickListener
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,15 +8,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.aseducationalproject.Domain.Recipe
+import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.ItemCategoryBinding
 
 
-class CategoryListAdapter(private val dataSet: List<Category>) :
-    RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
+class RecipeListAdapter(private val dataSet: List<Recipe>) :
+    RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
 
 
     interface OnItemClickListener {
-        fun onItemClick(CategoryId: Int)
+        fun onItemClick(RecipeId: Int)
     }
 
     private var itemClickListener: OnItemClickListener? = null
@@ -29,10 +29,10 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        //private val binding = ItemCategoryBinding.bind(view)
-        val imageView: ImageView = view.findViewById(R.id.ivCategory)
-        val titleTextView: TextView = view.findViewById(R.id.tvCategory)
-        val descriptionTextView: TextView = view.findViewById(R.id.tvCategoryDescription)
+        private val binding = ItemCategoryBinding.bind(view)
+
+        val imageView: ImageView = binding.ivItemCategory
+        val titleTextView: TextView = binding.tvItemCategory
 
         // поддягивает нужные данные по id
 
@@ -55,29 +55,25 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val category: Category = dataSet[position]
-        holder.titleTextView.text = category.title
-        holder.descriptionTextView.text = category.description
-
-
+        val recipe: Recipe = dataSet[position]
+        holder.titleTextView.text = recipe.title
 
 
         val drawable = try {
-            Drawable.createFromStream(holder.itemView.context.assets.open(category.imageUrl), null)
+            Drawable.createFromStream(holder.itemView.context.assets.open(recipe.imageUrl), null)
         } catch (e: Exception) {
-            Log.d("Not found", "Image not found: ${category.imageUrl}")
+            Log.d("Not found", "Image not found: ${recipe.imageUrl}")
             null
         }
 
         holder.imageView.setImageDrawable(drawable)
-        holder.imageView.contentDescription = category.title
-        holder.imageView.setOnClickListener {
+        holder.imageView.contentDescription = recipe.title
 
-            itemClickListener?.onItemClick(category.id)
+        holder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(recipe.id)
         }
 
     }
-
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount(): Int = dataSet.size
 
 }
