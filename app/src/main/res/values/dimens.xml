@@ -5,7 +5,7 @@
     // размер текста нахуй //
 
     <dimen name="layout_category_bcg_categories_224">224dp</dimen>
-
+    <dimen name="layout_fragment_recipe_list">224dp</dimen>
 
     <dimen name="card_view_itemCategory_round">8dp</dimen>
 
@@ -14,5 +14,10 @@
     <dimen name="burger_description_margin">8dp</dimen>
 
     <dimen name="main_space_8">8dp</dimen>
+
+
+    <dimen name="fragment_recipe_list_Text_Start">16dp</dimen>
+    <dimen name="fragment_recipe_list_Bottom">16dp</dimen>
+    <dimen name="fragment_recipe_list_16dp">16dp</dimen>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.Categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,10 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.aseducationalproject.R
+import com.example.aseducationalproject.Recipes.RecipesListFragment
+import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.databinding.FragmentListCategoriesBinding
-
 
 class CategoriesListFragment :
     Fragment(R.layout.fragment_list_categories) {
@@ -50,7 +52,7 @@ class CategoriesListFragment :
         binding.rvCategories.adapter = categoriesAdapter
 
         categoriesAdapter.setOnItemClickListener(object : CategoryListAdapter.OnItemClickListener{
-            override fun onItemClick(Id: Int) {
+            override fun onItemClick(id: Int) {
                 openRecipesByCategoryId(id)
             }
         })
@@ -60,9 +62,10 @@ class CategoriesListFragment :
     private fun openRecipesByCategoryId(categoryId: Int)
     {
         val category = STUB.getCategories()[categoryId]
+
         val bundle = bundleOf(
             "ARG_CATEGORY_ID" to categoryId,
-            "AGE_CATEGORY_NAME"  to category.title,
+            "AGE_CATEGORY_NAME" to category.title,
             "ARG_CATEGORY_IMAGE_URL" to category.imageUrl
 
 
@@ -72,10 +75,8 @@ class CategoriesListFragment :
             setReorderingAllowed(true)
             replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
         }
-        val categoryId: Int
     }
 
 
 
 }
-

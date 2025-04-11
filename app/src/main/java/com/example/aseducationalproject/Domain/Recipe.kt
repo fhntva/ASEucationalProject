@@ -1,4 +1,6 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.Domain
+
+import com.example.aseducationalproject.Domain.Ingredient
 
 class Recipe (
     val id: Int,
