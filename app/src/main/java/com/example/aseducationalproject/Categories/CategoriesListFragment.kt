@@ -8,6 +8,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.aseducationalproject.Constants.AGE_CATEGORY_NAME
+import com.example.aseducationalproject.Constants.ARG_CATEGORY_ID
+import com.example.aseducationalproject.Constants.ARG_CATEGORY_IMAGE_URL
 import com.example.aseducationalproject.R
 import com.example.aseducationalproject.Recipes.RecipesListFragment
 import com.example.aseducationalproject.DataTest.STUB
@@ -64,9 +67,9 @@ class CategoriesListFragment :
         val category = STUB.getCategories()[categoryId]
 
         val bundle = bundleOf(
-            "ARG_CATEGORY_ID" to categoryId,
-            "AGE_CATEGORY_NAME" to category.title,
-            "ARG_CATEGORY_IMAGE_URL" to category.imageUrl
+            ARG_CATEGORY_ID to categoryId,
+            AGE_CATEGORY_NAME to category.title,
+            ARG_CATEGORY_IMAGE_URL to category.imageUrl
 
 
         )

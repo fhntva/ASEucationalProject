@@ -5,9 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import com.example.aseducationalproject.Constants.AGE_CATEGORY_NAME
+import com.example.aseducationalproject.Constants.ARG_CATEGORY_ID
+import com.example.aseducationalproject.Constants.ARG_CATEGORY_IMAGE_URL
+import com.example.aseducationalproject.Constants.ARG_RECIPE
 import com.example.aseducationalproject.DataTest.STUB
+import com.example.aseducationalproject.DataTest.STUB.getRecipeById
+import com.example.aseducationalproject.Domain.Recipe
 import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.FragmentRecipeListBinding
 
@@ -36,9 +43,9 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipe_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryId = requireArguments().getInt("ARG_CATEGORY_ID")
-        categoryName = requireArguments().getString("AGE_CATEGORY_NAME")
-        categoryImageUrl = requireArguments().getString("ARG_CATEGORY_IMAGE_URL")
+        categoryId = requireArguments().getInt(ARG_CATEGORY_ID)
+        categoryName = requireArguments().getString(AGE_CATEGORY_NAME)
+        categoryImageUrl = requireArguments().getString(ARG_CATEGORY_IMAGE_URL)
         initRecycler()
     }
 
@@ -51,16 +58,20 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipe_list) {
         val recipeListAdapter = RecipeListAdapter(STUB.getRecipesByCategoryId(categoryId?:0))
         binding.rvRecipesList.adapter = recipeListAdapter
         recipeListAdapter.setOnItemClickListener(object : RecipeListAdapter.OnItemClickListener {
-            override fun onItemClick(RecipeId: Int) {
-                openRecipeByRecipeId()
+            override fun onItemClick(recipeId: Int) {
+                openRecipeByRecipeId(recipeId)
             }
         })
     }
 
-    fun openRecipeByRecipeId() {
+    fun openRecipeByRecipeId(recipeId:Int) {
+        val recipe: Recipe = getRecipeById(recipeId)
+
+        val bundle = bundleOf(ARG_RECIPE to recipe)
+
         fragmentManager?.commit {
             setReorderingAllowed(true)
-            replace<RecipeFragment>(R.id.mainContainer)
+            replace<RecipeFragment>(R.id.mainContainer,args = bundle)
         }
 
     }

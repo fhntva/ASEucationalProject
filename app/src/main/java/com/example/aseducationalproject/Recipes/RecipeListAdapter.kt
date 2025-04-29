@@ -18,7 +18,7 @@ class RecipeListAdapter(private val dataSet: List<Recipe>) :
 
 
     interface OnItemClickListener {
-        fun onItemClick(RecipeId: Int)
+        fun onItemClick(recipeId: Int)
     }
 
     private var itemClickListener: OnItemClickListener? = null
@@ -34,7 +34,7 @@ class RecipeListAdapter(private val dataSet: List<Recipe>) :
         val imageView: ImageView = binding.ivItemCategory
         val titleTextView: TextView = binding.tvItemCategory
 
-        // поддягивает нужные данные по id
+
 
 
     }
@@ -46,9 +46,8 @@ class RecipeListAdapter(private val dataSet: List<Recipe>) :
         //val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_category, viewGroup, false)
         println("// Я переводит xml  в объект\n")
 
-        val binding =
-            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        //return ViewHolder(view)
+        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return ViewHolder(binding.root)
     }
 

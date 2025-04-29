@@ -6,8 +6,8 @@
     tools:context=".Recipes.RecipeFragment">
 
     <TextView
+        android:id="@+id/tv_ItemRecipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ULULU" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>
