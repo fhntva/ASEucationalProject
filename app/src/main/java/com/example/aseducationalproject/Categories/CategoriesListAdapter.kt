@@ -18,7 +18,7 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
 
 
     interface OnItemClickListener {
-        fun onItemClick(CategoryId: Int)
+        fun onItemClick(id: Int)
     }
 
     private var itemClickListener: OnItemClickListener? = null
@@ -29,10 +29,10 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        //private val binding = ItemCategoryBinding.bind(view)
-        val imageView: ImageView = view.findViewById(R.id.iv_ItemCategory)
-        val titleTextView: TextView = view.findViewById(R.id.tv_ItemCategory)
-        val descriptionTextView: TextView = view.findViewById(R.id.tvCategoryDescription)
+        private val binding = ItemCategoryBinding.bind(view)
+        val imageView: ImageView = binding.ivItemCategory
+        val titleTextView: TextView = binding.tvItemCategory
+        val descriptionTextView: TextView = binding.tvCategoryDescription
 
         // поддягивает нужные данные по id
 
@@ -71,7 +71,7 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
 
         holder.imageView.setImageDrawable(drawable)
         holder.imageView.contentDescription = category.title
-        holder.imageView.setOnClickListener {
+        holder.itemView.setOnClickListener {
 
             itemClickListener?.onItemClick(category.id)
         }
