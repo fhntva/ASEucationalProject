@@ -6,61 +6,55 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    android:background="@color/backgroundСolor"
+    tools:context=".`MainActivity.kt`">
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginBottom="@dimen/spacing_8"
+        android:layout_marginHorizontal="@dimen/spacing_16"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <Button
+            android:id="@+id/btmCategoryButton"
+            style="@style/StyleNavButton"
+            android:layout_width="@dimen/button_width_default"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_4"
+            android:layout_weight="1"
+            android:backgroundTint="@color/categoryButtonColor"
+            android:text="@string/category_text" />
 
         <Button
-            android:id="@+id/btnCategoryMain"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
+            android:id="@+id/btmFavoritesButton"
+            style="@style/StyleNavButton"
             android:layout_weight="1"
-            android:background="@drawable/round_button_left_main_menu"
-            android:fontFamily="@font/montserratalternates_black"
-            android:text="Категории"
-            android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/btnFavoritesMain"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/button_width_default"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@drawable/round_button_right_main_menu"
-            android:fontFamily="@font/montserratalternates_black"
-            android:text="Избранное"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
+            android:backgroundTint="@color/favoriteButtonColor"
+            android:fontFamily="@font/montserrat_alternates_medium"
+            android:text="@string/favorite_text"
+            app:icon ="@drawable/ic_heart_empty"
+            app:iconGravity ="textEnd"
+            />
 
     </LinearLayout>
-
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/mainContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="50dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </androidx.fragment.app.FragmentContainerView>
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

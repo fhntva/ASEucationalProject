@@ -8,16 +8,14 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.aseducationalproject.Constants.AGE_CATEGORY_NAME
-import com.example.aseducationalproject.Constants.ARG_CATEGORY_ID
-import com.example.aseducationalproject.Constants.ARG_CATEGORY_IMAGE_URL
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.aseducationalproject.R
 import com.example.aseducationalproject.Recipes.RecipesListFragment
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.databinding.FragmentListCategoriesBinding
 
-class CategoriesListFragment :
-    Fragment(R.layout.fragment_list_categories) {
+
+class CategoriesListFragment : Fragment(R.layout.fragment_list_categories) {
 
     private var _binding: FragmentListCategoriesBinding? = null
     private val binding
@@ -27,59 +25,58 @@ class CategoriesListFragment :
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentListCategoriesBinding.inflate(layoutInflater)
+        savedInstanceState: Bundle?): View {
+        _binding = FragmentListCategoriesBinding.inflate(inflater,container,false)
         return binding.root
-
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        println(println("Я зашел в создание экрана "))
         initRecycler()
-
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-
-    fun initRecycler() {
-
-        val categoriesAdapter = CategoryListAdapter(STUB.getCategories())
-        binding.rvCategories.adapter = categoriesAdapter
-
-        categoriesAdapter.setOnItemClickListener(object : CategoryListAdapter.OnItemClickListener{
-            override fun onItemClick(id: Int) {
-                openRecipesByCategoryId(id)
-            }
-        })
-
-
+    companion object {
+        const val ARG_CATEGORY_ID = "arg_category_id"
+        const val ARG_CATEGORY_NAME = "arg_category_name"
+        const val ARG_CATEGORY_IMAGE_URL = "arg_category_image_url"
+        const val ARG_RECIPE = "arg_recipe"
     }
-    private fun openRecipesByCategoryId(categoryId: Int)
-    {
-        val category = STUB.getCategories()[categoryId]
+
+    private val categories = STUB.getCategories()
+
+    fun openRecipesByCategoryId(categoryId:Int) {
+
+        val idCategory = categories.find { it.id == categoryId }
+        val categoryTitle = idCategory?.title
+        val categoryImageUrl = idCategory?.imageUrl
 
         val bundle = bundleOf(
             ARG_CATEGORY_ID to categoryId,
-            AGE_CATEGORY_NAME to category.title,
-            ARG_CATEGORY_IMAGE_URL to category.imageUrl
-
-
+            ARG_CATEGORY_NAME to categoryTitle,
+            ARG_CATEGORY_IMAGE_URL to categoryImageUrl
         )
 
-        fragmentManager?.commit {
+        parentFragmentManager.commit {
             setReorderingAllowed(true)
             replace<RecipesListFragment>(R.id.mainContainer, args = bundle)
+            addToBackStack(null)
         }
+
     }
 
-
-
+    private fun initRecycler() {
+        val adapter = CategoriesListAdapter(categories)
+        binding.rvCategories.layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
+        binding.rvCategories.adapter = adapter
+        adapter.setOnItemClickListener (object : CategoriesListAdapter.OnItemClickListener {
+            override fun onItemClick(categoryId: Int) {
+                openRecipesByCategoryId(categoryId)
+            }
+        })
+    }
 }

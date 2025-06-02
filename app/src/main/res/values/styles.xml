@@ -1,26 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Widget.Theme.ASEducationalProject.ButtonBar.Fullscreen" parent="">
-        <item name="android:background">@color/backgroundBasicColor</item>
-        <item name="android:buttonBarStyle">?android:attr/buttonBarStyle</item>
-
-    </style>
-
-
-
-    <style name="graphite_666666" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/montserratalternates_medium</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/graphite_666666</item>
-    </style>
-
-
-    <style name="Button_text_style" parent="TextAppearance.AppCompat">
-        <item name="android:fontFamily">@font/montserratalternates_medium</item>
-        <item name="android:textSize">12sp</item>
+    <style name="StyleTitle14" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:textAllCaps">true</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="StyleMainTitle20" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/categoryTextViewColor</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="StyleTitleCategoryList14" parent="TextAppearance.AppCompat">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/montserrat_alternates_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/categoryTextViewColor</item>
+    </style>
+
+    <style name="StyleCategoryDescription12" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/categoryDescriptionColor</item>
+    </style>
+
+    <style name="ItemIngredient14" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/categoryDescriptionColor</item>
+    </style>
+
+    <style name="StyleNavButton" parent="Widget.Material3.Button">
+        <item name="cornerRadius">@dimen/corner_radius</item>
+        <item name="android:textAppearance">@style/StyleTitle14</item>
+    </style>
 
 </resources>
