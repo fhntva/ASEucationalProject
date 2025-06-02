@@ -1,41 +1,40 @@
 package com.example.aseducationalproject.Recipes
 
-import androidx.fragment.app.Fragment
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.aseducationalproject.Constants.AGE_CATEGORY_NAME
-import com.example.aseducationalproject.Constants.ARG_CATEGORY_ID
-import com.example.aseducationalproject.Constants.ARG_CATEGORY_IMAGE_URL
-import com.example.aseducationalproject.Constants.ARG_RECIPE
+import com.example.aseducationalproject.Categories.CategoriesListFragment
+import com.example.aseducationalproject.Categories.CategoriesListFragment.Companion.ARG_CATEGORY_IMAGE_URL
+import com.example.aseducationalproject.Categories.CategoriesListFragment.Companion.ARG_RECIPE
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.DataTest.STUB.getRecipeById
 import com.example.aseducationalproject.Domain.Recipe
 import com.example.aseducationalproject.R
-import com.example.aseducationalproject.databinding.FragmentRecipeListBinding
+import com.example.aseducationalproject.databinding.FragmentRecipesListBinding
 
-class RecipesListFragment : Fragment(R.layout.fragment_recipe_list) {
+class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
+    private var argCategoryId: Int? = null
+    private var argCategoryName: String? = null
+    private var argCategoryImageUrl: String? = null
 
-    private var _binding: FragmentRecipeListBinding? = null
+    private var _binding: FragmentRecipesListBinding? = null
     private val binding
         get() = _binding
-            ?: throw IllegalStateException("Binding for FragmentRecipesListBinding must be not null")
-
-    private var categoryId: Int? = null
-    private var categoryName: String? = null
-    private var categoryImageUrl: String? = null
-
+            ?: throw IllegalStateException("Binding for ActivityMainBinding must be not null")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = FragmentRecipeListBinding.inflate(layoutInflater)
+    ): View {
+        _binding = FragmentRecipesListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,10 +42,34 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipe_list) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        categoryId = requireArguments().getInt(ARG_CATEGORY_ID)
-        categoryName = requireArguments().getString(AGE_CATEGORY_NAME)
-        categoryImageUrl = requireArguments().getString(ARG_CATEGORY_IMAGE_URL)
+        initBundleData()
+        initUI()
         initRecycler()
+    }
+
+    fun initBundleData() {
+        arguments?.let { args ->
+            argCategoryId = args.getInt(CategoriesListFragment.ARG_CATEGORY_ID)
+            argCategoryName = args.getString(CategoriesListFragment.ARG_CATEGORY_NAME)
+            argCategoryImageUrl = args.getString(ARG_CATEGORY_IMAGE_URL)
+        }
+    }
+
+    fun initUI() {
+        binding.tvBurgersRecipes.text = argCategoryName
+        argCategoryImageUrl?.let { imageUrl ->
+            try {
+                val context = requireContext()
+                val inputStream = context.assets.open(imageUrl)
+                val drawable = Drawable.createFromStream(inputStream, null)
+                binding.ivFragmentRecipeList.setImageDrawable(drawable)
+                inputStream.close()
+            } catch (e: Exception) {
+                Log.e("argCategoryImageUrl", "Failed to load image from assets: $imageUrl")
+
+            }
+
+        }
     }
 
     override fun onDestroyView() {
@@ -54,27 +77,29 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipe_list) {
         _binding = null
     }
 
-    fun initRecycler() {
-        val recipeListAdapter = RecipeListAdapter(STUB.getRecipesByCategoryId(categoryId?:0))
-        binding.rvRecipesList.adapter = recipeListAdapter
-        recipeListAdapter.setOnItemClickListener(object : RecipeListAdapter.OnItemClickListener {
+    fun openRecipesByRecipeId(recipeId: Int) {
+
+        //
+        val recipe: Recipe? = getRecipeById(recipeId)
+        val bundle = bundleOf(ARG_RECIPE to recipe)
+        //
+        parentFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace<RecipeFragment>(R.id.mainContainer, args = bundle)
+            addToBackStack(null)
+        }
+    }
+
+    private fun initRecycler() {
+        val adapter = RecipesListAdapter(STUB.getRecipesByCategoryId(argCategoryId ?: 0))
+        binding.rvRecipes.adapter = adapter
+        adapter.setOnItemClickListener(object : RecipesListAdapter.OnItemClickListener {
             override fun onItemClick(recipeId: Int) {
-                openRecipeByRecipeId(recipeId)
+                openRecipesByRecipeId(recipeId)
             }
         })
     }
 
-    fun openRecipeByRecipeId(recipeId:Int) {
-        val recipe: Recipe = getRecipeById(recipeId)
-
-        val bundle = bundleOf(ARG_RECIPE to recipe)
-
-        fragmentManager?.commit {
-            setReorderingAllowed(true)
-            replace<RecipeFragment>(R.id.mainContainer,args = bundle)
-        }
-
-    }
-
 
 }
+

@@ -1,23 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- basic -->
+    <dimen name="spacing_4">4dp</dimen>
+    <dimen name="spacing_8">8dp</dimen>
+    <dimen name="spacing_16">16dp</dimen>
 
-    // размеры = все отступы в dp храним в димоне //
-    // размер текста нахуй //
+    <!-- button -->
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="button_width_default">0dp</dimen>
 
-    <dimen name="layout_category_bcg_categories_224">224dp</dimen>
-    <dimen name="layout_fragment_recipe_list">224dp</dimen>
+    <!-- card -->
+    <dimen name="card_image_height_130">130dp</dimen>
+    <dimen name="card_image_height_100">100dp</dimen>
+    <dimen name="card_image_recipe_height">100dp</dimen>
 
-    <dimen name="card_view_itemCategory_round">8dp</dimen>
-
-    <dimen name="text_view_burger">8dp</dimen> //
-
-    <dimen name="burger_description_margin">8dp</dimen>
-
-    <dimen name="main_space_8">8dp</dimen>
-
-
-    <dimen name="fragment_recipe_list_Text_Start">16dp</dimen>
-    <dimen name="fragment_recipe_list_Bottom">16dp</dimen>
-    <dimen name="fragment_recipe_list_16dp">16dp</dimen>
+    <!-- specific size -->
+    <dimen name="category_item_height">224dp</dimen>
 
 </resources>

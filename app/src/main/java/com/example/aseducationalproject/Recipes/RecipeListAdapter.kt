@@ -1,5 +1,6 @@
 package com.example.aseducationalproject.Recipes
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,11 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.aseducationalproject.Domain.Recipe
 import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.ItemCategoryBinding
+import com.example.aseducationalproject.databinding.ItemRecipeBinding
 
 
-class RecipeListAdapter(private val dataSet: List<Recipe>) :
-    RecyclerView.Adapter<RecipeListAdapter.ViewHolder>() {
-
+class RecipesListAdapter(val dataSet: List<Recipe>) :
+    RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
         fun onItemClick(recipeId: Int)
@@ -27,52 +28,41 @@ class RecipeListAdapter(private val dataSet: List<Recipe>) :
         itemClickListener = listener
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val binding: ItemRecipeBinding) : RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("StringFormatInvalid")
+        fun bind(recipe: Recipe) {
+            binding.tvRecipeName.text = recipe.title
 
-        private val binding = ItemCategoryBinding.bind(view)
-
-        val imageView: ImageView = binding.ivItemCategory
-        val titleTextView: TextView = binding.tvItemCategory
-
-
-
-
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-
-        // val inflater = LayoutInflater.from(viewGroup.context)
-        //val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_category, viewGroup, false)
-        println("// Я переводит xml  в объект\n")
-
-        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-
-        return ViewHolder(binding.root)
-    }
-
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val recipe: Recipe = dataSet[position]
-        holder.titleTextView.text = recipe.title
-
-
-        val drawable = try {
-            Drawable.createFromStream(holder.itemView.context.assets.open(recipe.imageUrl), null)
-        } catch (e: Exception) {
-            Log.d("Not found", "Image not found: ${recipe.imageUrl}")
-            null
+            try {
+                val drawable = Drawable.createFromStream(
+                    itemView.context.assets.open(recipe.imageUrl),
+                    null
+                )
+                binding.ivRecipe.setImageDrawable(drawable)
+                binding.ivRecipe.contentDescription = String.format(
+                    itemView.context.getString(R.string.recipe_image_description),
+                    recipe.title
+                )
+            } catch (e: Exception) {
+                Log.e("RecipesListFragment", "Ошибка загрузки изображения: ${recipe.title}", e)
+            }
         }
-
-        holder.imageView.setImageDrawable(drawable)
-        holder.imageView.contentDescription = recipe.title
-
-        holder.itemView.setOnClickListener {
-            itemClickListener?.onItemClick(recipe.id)
-        }
-
     }
-    override fun getItemCount(): Int = dataSet.size
 
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(viewGroup.context)
+        val view = ItemRecipeBinding.inflate(inflater, viewGroup, false)
+        return ViewHolder(view)
+    }
+
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val recipe = dataSet[position]
+        viewHolder.bind(recipe)
+
+        viewHolder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(recipeId = recipe.id)
+        }
+    }
+
+    override fun getItemCount() = dataSet.size
 }

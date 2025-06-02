@@ -13,12 +13,12 @@ import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.ItemCategoryBinding
 
 
-class CategoryListAdapter(private val dataSet: List<Category>) :
-    RecyclerView.Adapter<CategoryListAdapter.ViewHolder>() {
 
+class CategoriesListAdapter(private val dataSet: List<Category>) :
+    RecyclerView.Adapter<CategoriesListAdapter.ViewHolder>() {
 
     interface OnItemClickListener {
-        fun onItemClick(id: Int)
+        fun onItemClick(categoryId: Int)
     }
 
     private var itemClickListener: OnItemClickListener? = null
@@ -27,57 +27,41 @@ class CategoryListAdapter(private val dataSet: List<Category>) :
         itemClickListener = listener
     }
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(val binding: ItemCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(category: Category) {
+            binding.tvCategoryName.text = category.title
+            binding.tvCategoryDescription.text = category.description
 
-        private val binding = ItemCategoryBinding.bind(view)
-        val imageView: ImageView = binding.ivItemCategory
-        val titleTextView: TextView = binding.tvItemCategory
-        val descriptionTextView: TextView = binding.tvCategoryDescription
-
-        // поддягивает нужные данные по id
-
-
+            try {
+                val drawable = Drawable.createFromStream(
+                    itemView.context.assets.open(category.imageUrl),
+                    null
+                )
+                binding.ivCategory.setImageDrawable(drawable)
+                binding.ivCategory.contentDescription = String.format(
+                    itemView.context.getString(R.string.category_image_content_description),
+                    category.title
+                )
+            } catch (e: Exception) {
+                Log.e("CategoriesListAdapter", "Ошибка загрузки изображения: ${category.title}", e)
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
-
-        // val inflater = LayoutInflater.from(viewGroup.context)
-        //val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.item_category, viewGroup, false)
-        println("// Я переводит xml  в объект\n")
-
-        val binding =
-            ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        //return ViewHolder(view)
-        return ViewHolder(binding.root)
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
+        val inflater = LayoutInflater.from(viewGroup.context)
+        val view = ItemCategoryBinding.inflate(inflater, viewGroup, false)
+        return ViewHolder(view)
     }
 
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
+        val category = dataSet[position]
+        viewHolder.bind(category)
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val category: Category = dataSet[position]
-        holder.titleTextView.text = category.title
-        holder.descriptionTextView.text = category.description
-
-
-
-
-        val drawable = try {
-            Drawable.createFromStream(holder.itemView.context.assets.open(category.imageUrl), null)
-        } catch (e: Exception) {
-            Log.d("Not found", "Image not found: ${category.imageUrl}")
-            null
+        viewHolder.itemView.setOnClickListener {
+            itemClickListener?.onItemClick(categoryId = category.id)
         }
-
-        holder.imageView.setImageDrawable(drawable)
-        holder.imageView.contentDescription = category.title
-        holder.itemView.setOnClickListener {
-
-            itemClickListener?.onItemClick(category.id)
-        }
-
     }
 
     override fun getItemCount() = dataSet.size
-
 }
