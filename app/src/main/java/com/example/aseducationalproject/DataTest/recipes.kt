@@ -250,6 +250,9 @@ object STUB {
 
         return categories
     }
-
+    fun getRecipesByIds(set: Set<Int>): List<Recipe> {
+        val returning =  burgerRecipes.filter { it.id in set }
+        return returning
+    }
 
 }
