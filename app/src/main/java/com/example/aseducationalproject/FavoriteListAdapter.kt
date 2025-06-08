@@ -1,4 +1,4 @@
-package com.example.aseducationalproject.Recipes
+package com.example.aseducationalproject
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.aseducationalproject.Domain.Recipe
-import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.ItemRecipeBinding
 
-
-class RecipesListAdapter(val dataSet: List<Recipe>) :
-    RecyclerView.Adapter<RecipesListAdapter.ViewHolder>() {
+class FavoriteListAdapter(val dataSet: List<Recipe>) :
+    RecyclerView.Adapter<FavoriteListAdapter.ViewHolder>() {
 
     fun interface OnItemClickListener {
         fun onItemClick(recipeId: Int)

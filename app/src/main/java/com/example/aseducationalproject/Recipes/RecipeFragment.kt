@@ -12,7 +12,7 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aseducationalproject.Categories.CategoriesListFragment.Companion.ARG_RECIPE
+import com.example.aseducationalproject.Const.ARG_RECIPE
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.databinding.FragmentRecipeBinding
 import com.example.aseducationalproject.Domain.Recipe
@@ -102,9 +102,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     private fun initRecycler(recipeId: Recipe?) {
         val id: Int = recipeId?.id ?: 1
-        ingredientsAdapter = IngredientsAdapter(STUB.getRecipeById(id)?.ingredients ?: emptyList())
+        ingredientsAdapter = IngredientsAdapter(STUB.getRecipeById(id).ingredients)
         binding.rvIngredients.adapter = ingredientsAdapter
-        val methodsAdapter = MethodsAdapther(STUB.getRecipeById(id)?.method ?: emptyList())
+        val methodsAdapter = MethodsAdapther(STUB.getRecipeById(id).method)
         binding.rvMethod.adapter = methodsAdapter
         val divider = MaterialDividerItemDecoration(
             this.requireContext(), LinearLayoutManager.VERTICAL
