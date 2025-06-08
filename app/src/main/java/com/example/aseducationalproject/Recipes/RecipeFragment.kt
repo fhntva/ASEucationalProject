@@ -1,5 +1,6 @@
 package com.example.aseducationalproject.Recipes
 
+import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.fragment.app.Fragment
@@ -15,11 +16,13 @@ import com.example.aseducationalproject.Categories.CategoriesListFragment.Compan
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.databinding.FragmentRecipeBinding
 import com.example.aseducationalproject.Domain.Recipe
+import com.example.aseducationalproject.FAVORITE_SET_KEY
 import com.example.aseducationalproject.R
+import com.example.aseducationalproject.SP_KEY
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
-
+    private var favoriteBol = false
     private lateinit var ingredientsAdapter: IngredientsAdapter
     private var _binding: FragmentRecipeBinding? = null
     private val binding
@@ -59,17 +62,26 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         if (recipe?.title != null) {
             binding.tvRecipe.text = recipe.title
         }
+        val favoriteSet = getFavorites()
+
+        if (recipe?.id.toString() in favoriteSet) {
+            favoriteBol = true
+            binding.ibFavorite.setImageResource(R.drawable.ic_heart)
+        } else {
+            favoriteBol = false
+            binding.ibFavorite.setImageResource(R.drawable.ic_heart_empty)
+        }
         binding.ibFavorite.setOnClickListener {
-            try {
-                binding.ibFavorite.setImageDrawable(
-                    ContextCompat.getDrawable(
-                        requireContext(),
-                        R.drawable.ic_heart
-                    )
-                )
-            } catch (e: Exception) {
-                Log.d("Not found", "Image not found: ${"ibFavorite"}")
-                null
+            if (favoriteBol) {
+                favoriteBol = false
+                binding.ibFavorite.setImageResource(R.drawable.ic_heart_empty)
+                favoriteSet.remove(recipe?.id.toString())
+                saveFavorites(favoriteSet)
+            } else {
+                favoriteBol = true
+                binding.ibFavorite.setImageResource(R.drawable.ic_heart)
+                favoriteSet.add(recipe?.id.toString())
+                saveFavorites(favoriteSet)
             }
         }
         binding.ivRecipe.setImageDrawable(drawable)
@@ -86,7 +98,6 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
-
     }
 
     private fun initRecycler(recipeId: Recipe?) {
@@ -115,5 +126,13 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         _binding = null
     }
 
+    fun saveFavorites(favorites: Set<String>) {
+        val sharedPrefs = context?.getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
+        sharedPrefs?.edit()?.putStringSet(FAVORITE_SET_KEY, favorites)?.apply()
+    }
 
+    fun getFavorites(): HashSet<String> {
+        val sharedPrefs = requireContext().getSharedPreferences(SP_KEY, Context.MODE_PRIVATE)
+        return HashSet<String>(sharedPrefs.getStringSet(FAVORITE_SET_KEY, emptySet()))
+    }
 }
