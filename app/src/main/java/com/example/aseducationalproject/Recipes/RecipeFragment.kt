@@ -59,6 +59,19 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
         if (recipe?.title != null) {
             binding.tvRecipe.text = recipe.title
         }
+        binding.ibFavorite.setOnClickListener {
+            try {
+                binding.ibFavorite.setImageDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_heart
+                    )
+                )
+            } catch (e: Exception) {
+                Log.d("Not found", "Image not found: ${"ibFavorite"}")
+                null
+            }
+        }
         binding.ivRecipe.setImageDrawable(drawable)
         binding.sbFragmentRecipe.setOnSeekBarChangeListener(object :
             SeekBar.OnSeekBarChangeListener {
