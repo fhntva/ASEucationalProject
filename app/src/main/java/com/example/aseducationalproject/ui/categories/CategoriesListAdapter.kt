@@ -1,14 +1,11 @@
-package com.example.aseducationalproject.Categories
+package com.example.aseducationalproject.ui.categories
 
 import android.graphics.drawable.Drawable
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aseducationalproject.Domain.Category
+import com.example.aseducationalproject.model.Category
 import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.ItemCategoryBinding
 

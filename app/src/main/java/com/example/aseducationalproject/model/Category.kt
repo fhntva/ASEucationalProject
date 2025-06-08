@@ -1,4 +1,4 @@
-package com.example.aseducationalproject.Domain
+package com.example.aseducationalproject.model
 
 class Category(
     val id: Int,

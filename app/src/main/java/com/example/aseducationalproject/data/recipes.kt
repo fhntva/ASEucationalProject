@@ -1,8 +1,8 @@
 package com.example.aseducationalproject.DataTest
 
-import com.example.aseducationalproject.Domain.Category
-import com.example.aseducationalproject.Domain.Ingredient
-import com.example.aseducationalproject.Domain.Recipe
+import com.example.aseducationalproject.model.Category
+import com.example.aseducationalproject.model.Ingredient
+import com.example.aseducationalproject.model.Recipe
 
 object STUB {
 
@@ -250,6 +250,9 @@ object STUB {
 
         return categories
     }
-
+    fun getRecipesByIds(set: Set<Int>): List<Recipe> {
+        val returning =  burgerRecipes.filter { it.id in set }
+        return returning
+    }
 
 }

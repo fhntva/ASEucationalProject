@@ -1,4 +1,4 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.ui.recipes.favorites
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Drawable
@@ -6,7 +6,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.aseducationalproject.Domain.Recipe
+import com.example.aseducationalproject.R
+import com.example.aseducationalproject.model.Recipe
 import com.example.aseducationalproject.databinding.ItemRecipeBinding
 
 class FavoriteListAdapter(val dataSet: List<Recipe>) :

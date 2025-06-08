@@ -1,4 +1,4 @@
-package com.example.aseducationalproject.Recipes
+package com.example.aseducationalproject.ui.recipes.recipeList
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -10,13 +10,14 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.aseducationalproject.Const
-import com.example.aseducationalproject.Const.ARG_RECIPE
+import com.example.aseducationalproject.ui.Const
+import com.example.aseducationalproject.ui.Const.ARG_RECIPE
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.DataTest.STUB.getRecipeById
-import com.example.aseducationalproject.Domain.Recipe
+import com.example.aseducationalproject.model.Recipe
 import com.example.aseducationalproject.R
 import com.example.aseducationalproject.databinding.FragmentRecipesListBinding
+import com.example.aseducationalproject.ui.recipes.recipe.RecipeFragment
 
 class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
     private var argCategoryId: Int? = null

@@ -1,4 +1,4 @@
-package com.example.aseducationalproject.Recipes
+package com.example.aseducationalproject.ui.recipes.recipe
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -12,13 +12,13 @@ import android.view.ViewGroup
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.aseducationalproject.Const.ARG_RECIPE
+import com.example.aseducationalproject.ui.Const.ARG_RECIPE
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.databinding.FragmentRecipeBinding
-import com.example.aseducationalproject.Domain.Recipe
-import com.example.aseducationalproject.FAVORITE_SET_KEY
+import com.example.aseducationalproject.model.Recipe
+import com.example.aseducationalproject.ui.FAVORITE_SET_KEY
 import com.example.aseducationalproject.R
-import com.example.aseducationalproject.SP_KEY
+import com.example.aseducationalproject.ui.SP_KEY
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {

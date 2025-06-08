@@ -1,4 +1,4 @@
-package com.example.aseducationalproject.Categories
+package com.example.aseducationalproject.ui.categories
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.aseducationalproject.Const.ARG_CATEGORY_ID
-import com.example.aseducationalproject.Const.ARG_CATEGORY_IMAGE_URL
-import com.example.aseducationalproject.Const.ARG_CATEGORY_NAME
+import com.example.aseducationalproject.ui.Const.ARG_CATEGORY_ID
+import com.example.aseducationalproject.ui.Const.ARG_CATEGORY_IMAGE_URL
+import com.example.aseducationalproject.ui.Const.ARG_CATEGORY_NAME
 import com.example.aseducationalproject.R
-import com.example.aseducationalproject.Recipes.RecipesListFragment
+import com.example.aseducationalproject.ui.recipes.recipeList.RecipesListFragment
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.databinding.FragmentListCategoriesBinding
 
