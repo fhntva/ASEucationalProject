@@ -1,4 +1,4 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.ui.recipes.favorites
 
 import android.content.Context
 import android.os.Bundle
@@ -12,9 +12,13 @@ import androidx.fragment.app.replace
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.DataTest.STUB.getRecipeById
-import com.example.aseducationalproject.Domain.Recipe
-import com.example.aseducationalproject.Recipes.RecipeFragment
+import com.example.aseducationalproject.R
+import com.example.aseducationalproject.model.Recipe
+import com.example.aseducationalproject.ui.recipes.recipe.RecipeFragment
 import com.example.aseducationalproject.databinding.FragmentFavoritesBinding
+import com.example.aseducationalproject.ui.Const
+import com.example.aseducationalproject.ui.FAVORITE_SET_KEY
+import com.example.aseducationalproject.ui.SP_KEY
 
 class FavoritesFragment : Fragment(R.layout.fragment_favorites) {
     private lateinit var favoritesList: Set<Int>

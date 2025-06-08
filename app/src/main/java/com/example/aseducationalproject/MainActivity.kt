@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.aseducationalproject.Categories.CategoriesListFragment
+import com.example.aseducationalproject.ui.categories.CategoriesListFragment
 import com.example.aseducationalproject.databinding.ActivityMainBinding
+import com.example.aseducationalproject.ui.recipes.favorites.FavoritesFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding

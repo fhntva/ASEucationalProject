@@ -1,4 +1,4 @@
-package com.example.aseducationalproject
+package com.example.aseducationalproject.ui
 
 const val SP_KEY = "pref_key"
 const val FAVORITE_SET_KEY = "add_to_favorite"
