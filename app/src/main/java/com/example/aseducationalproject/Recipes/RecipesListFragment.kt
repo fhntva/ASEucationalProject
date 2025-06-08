@@ -10,9 +10,8 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
-import com.example.aseducationalproject.Categories.CategoriesListFragment
-import com.example.aseducationalproject.Categories.CategoriesListFragment.Companion.ARG_CATEGORY_IMAGE_URL
-import com.example.aseducationalproject.Categories.CategoriesListFragment.Companion.ARG_RECIPE
+import com.example.aseducationalproject.Const
+import com.example.aseducationalproject.Const.ARG_RECIPE
 import com.example.aseducationalproject.DataTest.STUB
 import com.example.aseducationalproject.DataTest.STUB.getRecipeById
 import com.example.aseducationalproject.Domain.Recipe
@@ -49,9 +48,9 @@ class RecipesListFragment : Fragment(R.layout.fragment_recipes_list) {
 
     fun initBundleData() {
         arguments?.let { args ->
-            argCategoryId = args.getInt(CategoriesListFragment.ARG_CATEGORY_ID)
-            argCategoryName = args.getString(CategoriesListFragment.ARG_CATEGORY_NAME)
-            argCategoryImageUrl = args.getString(ARG_CATEGORY_IMAGE_URL)
+            argCategoryId = args.getInt(Const.ARG_CATEGORY_ID)
+            argCategoryName = args.getString(Const.ARG_CATEGORY_NAME)
+            argCategoryImageUrl = args.getString(Const.ARG_CATEGORY_IMAGE_URL)
         }
     }
 
