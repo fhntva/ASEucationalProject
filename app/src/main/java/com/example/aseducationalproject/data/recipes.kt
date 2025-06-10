@@ -13,9 +13,7 @@ object STUB {
         Category(3, "Рыба", "Печеная, жареная, сушеная, любая рыба на твой вкус", "fish.png"),
         Category(4, "Супы", "От классики до экзотики: мир в одной тарелке", "soup.png"),
         Category(5, "Салаты", "Хрустящий калейдоскоп под соусом вдохновения", "salad.png"),
-
     )
-
 
     private val burgerRecipes = listOf(
         Recipe(
@@ -239,17 +237,17 @@ object STUB {
         )
     )
 
-
-    fun getRecipesByCategoryId(categoryId: Int): List<Recipe>{
-    return if (categoryId ==0) burgerRecipes else listOf()
-    }
-
-    fun getRecipeById(recipeId: Int): Recipe = burgerRecipes[recipeId]
-
     fun getCategories(): List<Category> {
-
         return categories
     }
+
+    fun getRecipeById(recipeId: Int): Recipe? = burgerRecipes.find { it.id == recipeId }
+
+    fun getRecipesByCategoryId(categoryId: Int): List<Recipe> {
+        return if (categoryId == 0) burgerRecipes
+        else listOf()
+    }
+
     fun getRecipesByIds(set: Set<Int>): List<Recipe> {
         val returning =  burgerRecipes.filter { it.id in set }
         return returning
