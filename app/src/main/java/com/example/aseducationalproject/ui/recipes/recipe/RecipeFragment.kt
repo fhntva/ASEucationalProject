@@ -1,5 +1,6 @@
 package com.example.aseducationalproject.ui.recipes.recipe
 
+import androidx.fragment.app.viewModels
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.os.Build
@@ -22,6 +23,8 @@ import com.example.aseducationalproject.ui.SP_KEY
 import com.google.android.material.divider.MaterialDividerItemDecoration
 
 class RecipeFragment : Fragment(R.layout.fragment_recipe) {
+
+    private val viewModel: RecipeViewModel by viewModels()
     private var favoriteBol = false
     private lateinit var ingredientsAdapter: IngredientsAdapter
     private var _binding: FragmentRecipeBinding? = null
@@ -42,6 +45,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
             requireArguments().getParcelable(ARG_RECIPE, Recipe::class.java)
         } else {
             requireArguments().getParcelable(ARG_RECIPE)
+        }
+        viewModel.recipeState.observe(viewLifecycleOwner){
+            Log.d("RecipeViewModel", "onViewCreated: isFavorite: ${it.isFavorite}")
         }
         initUI(recipe)
         initRecycler(recipe)
@@ -102,9 +108,9 @@ class RecipeFragment : Fragment(R.layout.fragment_recipe) {
 
     private fun initRecycler(recipeId: Recipe?) {
         val id: Int = recipeId?.id ?: 1
-        ingredientsAdapter = IngredientsAdapter(STUB.getRecipeById(id).ingredients)
+        ingredientsAdapter = IngredientsAdapter(STUB.getRecipeById(id)?.ingredients ?: emptyList())
         binding.rvIngredients.adapter = ingredientsAdapter
-        val methodsAdapter = MethodsAdapther(STUB.getRecipeById(id).method)
+        val methodsAdapter = MethodsAdapther(STUB.getRecipeById(id)?.method ?: emptyList())
         binding.rvMethod.adapter = methodsAdapter
         val divider = MaterialDividerItemDecoration(
             this.requireContext(), LinearLayoutManager.VERTICAL
